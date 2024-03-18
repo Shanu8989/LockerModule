@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "LockerModule"
-include ':dataLockerModule'
+include ':dataLandingLockerModule'
