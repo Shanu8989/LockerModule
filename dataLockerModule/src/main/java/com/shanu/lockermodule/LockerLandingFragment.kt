@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.AsyncListUtil.DataCallback
 import com.shanu.lockermodule.databinding.FragmentLockerLandingBinding
 
 /**
@@ -18,6 +19,12 @@ class LockerLandingFragment : Fragment() {
 
     private var _binding: FragmentLockerLandingBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var lockerModuleDataCallback: () -> Unit
+
+    fun registerLockerModuleDataCallback(dataCallback: () -> Unit) {
+        lockerModuleDataCallback = dataCallback
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -36,14 +43,15 @@ class LockerLandingFragment : Fragment() {
                 /*val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
                 activity?.finish()*/
-                Intent(
-                    requireActivity(),
-                    Class.forName("com.shanu.nmsuperapp.presentation.activity.LoginActivity")
-                ).apply {
-                    startActivity(this)
-                }.also {
-                    activity?.finish()
-                }
+//                Intent(
+//                    requireActivity(),
+//                    Class.forName("com.shanu.nmsuperapp.presentation.activity.LoginActivity")
+//                ).apply {
+//                    startActivity(this)
+//                }.also {
+//                    activity?.finish()
+//                }
+                lockerModuleDataCallback.invoke()
             }
         })
     }
